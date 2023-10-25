@@ -8,6 +8,8 @@
 
 [Exercise 3](https://github.com/brett-ranieri/python-achievement-2/tree/main#exercise-3)
 
+[Exercise 4](https://github.com/brett-ranieri/python-achievement-2/tree/main#exercise-4)
+
 
 ## Exercise 1
 
@@ -128,5 +130,50 @@ class RecipeModelTest(TestCase):
         ing_help_text = recipe._meta.get_field("ingredients").help_text
         # comparae value to expected result
         self.assertEqual(ing_help_text, "Ingredients must be seperated by commas.")`
+
+
+## Exercise 4
+
+#### Define view
+
+After navigating to the <app>/views.py file of the desired app, add the following code:
+
+`# define function that will return view using built in render function
+ def home(request):
+    return render(request, "recipes/recipes_home.html")`
+
+#### Create template
+
+After creating templates folder in app, create <app> folder inside templates folder, inside that folder save `recipes_home.html` file and add the following code:
+
+`<!DOCTYPE html>`
+    <!-- basic html design -->
+`<html>`
+	`<title>Recipe App</title>`
+	`<body>`
+		`Welcome to the Recipe App!`
+	`/body>`
+`</html>`
+
+#### Map view to URL
+
+Create a `urls.py` file in <app> folder and add the following code:
+
+`   # import home view
+from .views import home
+     # specify app name
+app_name = "recipes"
+     # establish url patterns
+urlpatterns = [path("", home)]`
+
+Update the `urls.py` file in the main project folder by adding the following code:
+
+`   # import include function
+from django.urls import include
+urlpatterns = [
+    path("admin/", admin.site.urls), 
+    path("", include("recipes.urls"))
+    ]`
+
 
 
